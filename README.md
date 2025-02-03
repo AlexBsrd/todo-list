@@ -47,10 +47,15 @@ npm run dev
 ## 💭 Commentaires
 
 Merci pour l'intitulé, j'ai passé environ deux heures sur ce projet en m'aidant de Claude.ai pour apprendre les bases de Next.js que j'utilisais pour la première fois.
+
 Claude m'a également aidé pour poser l'arborescence du projet étant donné qu'elle est dirigée par les contraintes/avantages (au choix 😉) de Next.js, mais également pour tout le design. Même si j'en avais entendu parler je n'avais jamais utilisé Tailwind et c'est conforme aux retours que j'avais lu : très verbeux mais très pratique. 😄
-J'ai beaucoup apprécié découvrir ce nouveau framework, j'étais un peu rouillé en React mais j'ai vite retrouvé les bases acquises pendant mes études. Durant mes échanges avec Claude j'ai également quelques fois fait le pendant avec la manière dont telle ou telle fonctionnalité est implémentée en Angular et ce fut très intéressant !
+
+J'ai beaucoup apprécié découvrir ce nouveau framework, j'étais un peu rouillé en React mais j'ai vite retrouvé les bases acquises pendant mes études. Durant mes échanges avec Claude j'ai également quelques fois fait le "pendant" avec la manière dont telle ou telle fonctionnalité est implémentée en Angular et ce fut très intéressant !
+
 Je trouves super sympa la possibilité de choisir directement par composant le fait de faire le rendering côté client ou côté serveur, je n'avais encore jamais vu ça et c'est vrai que cette gestion là est beaucoup plus globale en angular.
+
 Il s'agit vraiment d'une base de projet, je pourrais passer des jours à implémenter des fonctionnalités qui me viennent en tête.
+
 Je fais la liste ci-dessous, je pourrai éventuellement les implémenter si besoin 😊.
 
 ## 🎯 Futures améliorations envisagées
