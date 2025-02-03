@@ -33,13 +33,14 @@ export function TaskList() {
                 {tasks.length > 0 && (
                     <button
                         onClick={clearTasks}
-                        className="ml-4 px-4 py-2 text-red-500 hover:text-red-600
+                        className="ml-4 px-3 sm:px-4 py-2 text-red-500 hover:text-red-600
                                  dark:text-red-400 dark:hover:text-red-300
                                  focus:outline-none flex items-center gap-2
-                                 transition-colors duration-200 font-medium"
+                                 transition-colors duration-200 font-medium whitespace-nowrap"
                     >
                         <Trash2 className="h-4 w-4" />
-                        Supprimer toutes les tâches
+                        <span className="hidden sm:inline">Supprimer toutes les tâches</span>
+                        <span className="sm:hidden">Tout supprimer</span>
                     </button>
                 )}
             </div>

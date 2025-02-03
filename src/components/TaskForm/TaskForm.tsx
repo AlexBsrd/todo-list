@@ -39,7 +39,7 @@ export function TaskForm() {
                 <button
                     onClick={handleSubmit}
                     disabled={!newTaskTitle.trim()}
-                    className="px-6 py-2.5 bg-blue-500 text-white rounded-lg
+                    className="px-4 sm:px-6 py-2.5 bg-blue-500 text-white rounded-lg
                              hover:bg-blue-600
                              focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900
                              focus:outline-none transition-all duration-200
@@ -47,7 +47,7 @@ export function TaskForm() {
                              flex items-center gap-2 font-medium"
                 >
                     <Plus className="h-5 w-5" />
-                    Ajouter
+                    <span className="hidden sm:inline">Ajouter</span>
                 </button>
             </div>
         </div>
