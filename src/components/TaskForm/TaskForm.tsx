@@ -1,29 +1,55 @@
-'use client';
-
-import { useState, KeyboardEvent } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
+import { Plus } from 'lucide-react';
 import { useTaskContext } from '@/contexts/TaskContext';
 
 export function TaskForm() {
     const { addTask } = useTaskContext();
     const [newTaskTitle, setNewTaskTitle] = useState('');
 
-    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && newTaskTitle.trim()) {
+    const handleSubmit = () => {
+        if (newTaskTitle.trim()) {
             addTask(newTaskTitle.trim());
             setNewTaskTitle('');
         }
     };
 
+    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     return (
-        <div className="border-b border-gray-200 hover:border-gray-400 transition-colors">
-            <input
-                type="text"
-                placeholder="Nouvelle tâche... (Appuyez sur Entrée pour ajouter)"
-                className="w-full px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none"
-                value={newTaskTitle}
-                onChange={(e) => setNewTaskTitle(e.target.value)}
-                onKeyPress={handleKeyPress}
-            />
+        <div className="p-6 border-b border-gray-100 dark:border-gray-700">
+            <div className="flex gap-3">
+                <input
+                    type="text"
+                    placeholder="Ajouter une nouvelle tâche..."
+                    className="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600
+                             bg-white dark:bg-gray-700
+                             text-gray-900 dark:text-gray-100
+                             hover:border-gray-300 dark:hover:border-gray-500
+                             focus:border-blue-500 dark:focus:border-blue-400
+                             focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900
+                             focus:outline-none transition-all duration-200"
+                    value={newTaskTitle}
+                    onChange={(e) => setNewTaskTitle(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                />
+                <button
+                    onClick={handleSubmit}
+                    disabled={!newTaskTitle.trim()}
+                    className="px-6 py-2.5 bg-blue-500 text-white rounded-lg
+                             hover:bg-blue-600
+                             focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900
+                             focus:outline-none transition-all duration-200
+                             disabled:opacity-50 disabled:cursor-not-allowed
+                             flex items-center gap-2 font-medium"
+                >
+                    <Plus className="h-5 w-5" />
+                    Ajouter
+                </button>
+            </div>
         </div>
     );
 }
