@@ -46,9 +46,17 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
         setTasks([]);
     };
 
+    const editTask = (id: string, newTitle: string) => {
+        setTasks((prev) =>
+            prev.map((task) =>
+                task.id === id ? { ...task, title: newTitle } : task
+            )
+        );
+    };
+
     return (
         <TaskContext.Provider
-            value={{ tasks, addTask, toggleTask, deleteTask, clearTasks }}
+            value={{ tasks, addTask, toggleTask, editTask, deleteTask, clearTasks }}
         >
             {children}
         </TaskContext.Provider>

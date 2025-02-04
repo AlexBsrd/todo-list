@@ -17,6 +17,9 @@ Le résultat est disponible sur https://alexbsrd.github.io/todo-list/.
 - Positionnement des nouvelles tâches en haut de la liste (la nuit porte conseil et ce matin je ne trouvais pas ça naturel que les tâches s'empilent par le bas)
 - Affichage de la date de création des tâches sur celles-ci
 
+### Ajouté le 04/02/25 à 13h45 :
+- Ajout de la possibilité d'éditer le titre d'une tâche (même si elle est déjà complétée)
+
 ## 🛠 Technologies/Librairies utilisées
 
 - **Next.js** - Framework React
