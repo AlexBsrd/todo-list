@@ -7,6 +7,15 @@ type TaskItemProps = {
     task: Task;
 };
 
+const COLORS = [
+    { name: 'default', bg: 'hover:bg-gray-50 dark:hover:bg-gray-700/50', dot: 'bg-gray-300 dark:bg-gray-600' },
+    { name: 'red', bg: 'bg-red-50 dark:bg-red-950/40 hover:bg-red-100/80 dark:hover:bg-red-900/50', dot: 'bg-red-500 dark:bg-red-400' },
+    { name: 'green', bg: 'bg-green-50 dark:bg-green-950/40 hover:bg-green-100/80 dark:hover:bg-green-900/50', dot: 'bg-green-500 dark:bg-green-400' },
+    { name: 'blue', bg: 'bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100/80 dark:hover:bg-blue-900/50', dot: 'bg-blue-500 dark:bg-blue-400' },
+    { name: 'yellow', bg: 'bg-yellow-50 dark:bg-yellow-950/40 hover:bg-yellow-100/80 dark:hover:bg-yellow-900/50', dot: 'bg-yellow-500 dark:bg-yellow-400' },
+    { name: 'purple', bg: 'bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100/80 dark:hover:bg-purple-900/50', dot: 'bg-purple-500 dark:bg-purple-400' },
+];
+
 const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('fr-FR', {
         day: '2-digit',
@@ -17,16 +26,32 @@ const formatDate = (date: Date) => {
 };
 
 export function TaskItem({ task }: TaskItemProps) {
-    const { toggleTask, deleteTask, editTask } = useTaskContext();
+    const { toggleTask, deleteTask, editTask, updateTaskColor } = useTaskContext();
     const [isEditing, setIsEditing] = useState(false);
     const [editedTitle, setEditedTitle] = useState(task.title);
+    const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
+    const colorPickerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (isEditing && inputRef.current) {
             inputRef.current.focus();
         }
     }, [isEditing]);
+
+    useEffect(() => {
+        // Pour fermer le color picker au clic sur un autre endroit de la page
+        function handleClickOutside(event: MouseEvent) {
+            if (colorPickerRef.current && !colorPickerRef.current.contains(event.target as Node)) {
+                setIsColorPickerOpen(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        // Note: en appli prod, peut-être risqué de binder une fonction sur cet évènement au risque de ralentir
+        // les perfs de l'appli ?
+        return () => document.removeEventListener('mousedown', handleClickOutside); //cleanup function, je ne connaissais pas ce concept
+    }, []);
 
     const handleEdit = () => {
         if (editedTitle.trim() && editedTitle !== task.title) {
@@ -51,9 +76,10 @@ export function TaskItem({ task }: TaskItemProps) {
 
     return (
         <div className={`group p-6 border-b border-gray-100 dark:border-gray-700 
-                        flex items-center gap-4 transition-all duration-200 
-                        hover:bg-gray-50 dark:hover:bg-gray-700/50 
-                        ${task.completed ? 'bg-gray-50 dark:bg-gray-700/50' : ''}`}>
+                        flex items-center gap-4 transition-all duration-200
+                        ${task.color ? COLORS.find(c => c.name === task.color)?.bg : 'bg-white dark:bg-gray-800'}
+                        hover:brightness-95 dark:hover:brightness-110
+                        ${task.completed ? 'opacity-60' : ''}`}>
             <button
                 onClick={() => toggleTask(task.id)}
                 className={`flex items-center justify-center h-5 w-5 rounded-full border-2 
@@ -112,6 +138,37 @@ export function TaskItem({ task }: TaskItemProps) {
                     {formatDate(task.createdAt)}
                 </span>
                 <div className="absolute inset-y-0 right-0 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="relative" ref={colorPickerRef}>
+                        <button
+                            onClick={() => setIsColorPickerOpen(!isColorPickerOpen)}
+                            className="flex items-center text-gray-400 hover:text-gray-600
+                                     dark:text-gray-500 dark:hover:text-gray-300"
+                            aria-label="Changer la couleur"
+                        >
+                            <div className={`w-4 h-4 rounded-full border border-gray-200 dark:border-gray-700
+                                          ${task.color ? COLORS.find(c => c.name === task.color)?.dot : 'bg-gray-300 dark:bg-gray-600'}`} />
+                        </button>
+
+                        {isColorPickerOpen && (
+                            <div className="absolute right-0 mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg
+                                          border border-gray-200 dark:border-gray-700 p-2 z-10">
+                                <div className="flex gap-1">
+                                    {COLORS.map((color) => (
+                                        <button
+                                            key={color.name}
+                                            onClick={() => {
+                                                updateTaskColor(task.id, color.name);
+                                                setIsColorPickerOpen(false);
+                                            }}
+                                            className={`w-6 h-6 rounded-full ${color.bg} border border-gray-200 
+                                                      dark:border-gray-600 hover:scale-110 transition-transform`}
+                                            aria-label={`Couleur ${color.name}`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <button
                         onClick={() => setIsEditing(true)}
                         className="flex items-center text-gray-400 hover:text-blue-500

@@ -3,6 +3,7 @@ export interface Task {
     title: string;
     completed: boolean;
     createdAt: Date;
+    color?: string
 }
 
 export type TaskContextType = {
@@ -10,6 +11,7 @@ export type TaskContextType = {
     addTask: (title: string) => void;
     toggleTask: (id: string) => void;
     editTask: (id: string, newTitle: string) => void;
+    updateTaskColor: (id: string, color: string) => void;
     deleteTask: (id: string) => void;
     clearTasks: () => void;
 };

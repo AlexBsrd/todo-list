@@ -54,9 +54,19 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
         );
     };
 
+    const updateTaskColor = (id: string, color: string) => {
+        setTasks((prev) =>
+            prev.map((task) =>
+                task.id === id ? { ...task, color } : task
+            )
+        );
+        // Note: pour l'instant c'est plus clair de faire une fonction par attribut
+        // mais il faudra réfléchir à factoriser tout ça dans une fonction updateAttribute(key, value)
+    };
+
     return (
         <TaskContext.Provider
-            value={{ tasks, addTask, toggleTask, editTask, deleteTask, clearTasks }}
+            value={{ tasks, addTask, toggleTask, editTask, updateTaskColor, deleteTask, clearTasks }}
         >
             {children}
         </TaskContext.Provider>

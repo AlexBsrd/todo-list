@@ -20,6 +20,9 @@ Le résultat est disponible sur https://alexbsrd.github.io/todo-list/.
 ### Ajouté le 04/02/25 à 13h45 :
 - Ajout de la possibilité d'éditer le titre d'une tâche (même si elle est déjà complétée)
 
+### Ajouté le 04/02/25 à 14h15 :
+- Couleur désormais customisable par tâche (pour catégoriser visuellement)
+
 ## 🛠 Technologies/Librairies utilisées
 
 - **Next.js** - Framework React
@@ -68,7 +71,7 @@ Je fais la liste ci-dessous, je pourrai éventuellement les implémenter si beso
 
 ## 🎯 Futures améliorations envisagées
 
-- [ ] Ajout de catégories pour les tâches (notamment avec des couleurs)
+- [x] ~~Ajout de catégories pour les tâches (notamment avec des couleurs)~~ (Couleurs ajoutées le 04/02/25 à 14h15)
 - [ ] Filtres avancés (par statut, date, catégorie, etc.)
 - [ ] Support des sous-tâches (je penses notamment aux devs avec des features et des US 😉)
 - [ ] Ajout de dates d'échéance
