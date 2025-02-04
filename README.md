@@ -3,14 +3,19 @@
 Une application de gestion de tâches développée avec React, TypeScript et Next.js dans le cadre d'un test technique.
 Le résultat est disponible sur https://alexbsrd.github.io/todo-list/.
 
-## 🚀 Fonctionnalités présentes (03/02/25 21h30)
+## 🚀 Fonctionnalités présentes
 
+### "v1" du 03/02/25 21h30 :
 - Création de nouvelles tâches
 - Persistence des données dans le localStorage du navigateur
 - Recherche parmi les tâches existantes
 - Marquage des tâches comme terminées
 - Suppression globale de toutes les tâches
 - Thème clair/sombre (via les préférences système)
+
+### Ajouté le 04/02/25 à 9h30 : 
+- Positionnement des nouvelles tâches en haut de la liste (la nuit porte conseil et ce matin je ne trouvais pas ça naturel que les tâches s'empilent par le bas)
+- Affichage de la date de création des tâches sur celles-ci
 
 ## 🛠 Technologies/Librairies utilisées
 

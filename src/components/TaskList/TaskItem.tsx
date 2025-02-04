@@ -7,6 +7,15 @@ type TaskItemProps = {
     task: Task;
 };
 
+const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('fr-FR', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+    }).format(date);
+};
+
 export function TaskItem({ task }: TaskItemProps) {
     const { toggleTask, deleteTask } = useTaskContext();
 
@@ -35,15 +44,20 @@ export function TaskItem({ task }: TaskItemProps) {
                 {task.title}
             </span>
 
-            <button
-                onClick={() => deleteTask(task.id)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-200
-                         p-2 text-gray-400 hover:text-red-500
-                         dark:text-gray-500 dark:hover:text-red-400"
-                aria-label="Supprimer la tâche"
-            >
-                <Trash2 className="h-4 w-4" />
-            </button>
+            <div className="relative w-32 flex justify-end">
+                <span className="text-sm text-gray-400 dark:text-gray-500 group-hover:opacity-0 transition-opacity duration-200">
+                    {formatDate(task.createdAt)}
+                </span>
+                <button
+                    onClick={() => deleteTask(task.id)}
+                    className="absolute inset-y-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                             flex items-center text-gray-400 hover:text-red-500
+                             dark:text-gray-500 dark:hover:text-red-400"
+                    aria-label="Supprimer la tâche"
+                >
+                    <Trash2 className="h-4 w-4" />
+                </button>
+            </div>
         </div>
     );
 }

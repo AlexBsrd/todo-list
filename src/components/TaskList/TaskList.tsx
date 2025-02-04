@@ -18,7 +18,7 @@ export function TaskList() {
         setFilteredTasks(
             tasks.filter((task) =>
                 task.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
+            ).reverse()
         );
     }, [tasks, searchTerm]);
 
